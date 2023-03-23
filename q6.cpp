@@ -50,11 +50,27 @@ public:
     }
     void setBookTitle(char *title)
     {
-        bookTitle = title;
+        int size = 1;
+        for (int i = 0; bookTitle[i] == '\0'; i++)
+        {
+            size++;
+        }
+        for (int i = 0; i < size; i++)
+        {
+            bookTitle[i] = title[i];
+        }
     }
     void setAuthor(char *authorName)
     {
-        author = authorName;
+        int size = 1;
+        for (int i = 0; authorName[i] == '\0'; i++)
+        {
+            size++;
+        }
+        for (int i = 0; i < size; i++)
+        {
+            author[i] = authorName[i];
+        }
     }
     void setBookID(int bookID)
     {
@@ -76,9 +92,9 @@ public:
     {
         this->price = price;
     }
-    static void setTotalBooks(int totalBooks)
+    static void setTotalBooks(int totBooks)
     {
-        totalBooks = totalBooks;
+        totalBooks = totBooks;
     }
     void calcTotalPrice()
     {
@@ -92,14 +108,30 @@ public:
 };
 Library getBook_at(Library books[100], int index)
 {
-    return books[index];
+    Library Book_at = books[index];
+    return Book_at;
 }
 void addBook(Library books[100], Library newBook)
 {
     for (int i = 0; i < 100; i++)
     {
+        if (Library::getTotalBooks() < 100)
+        {
+            Library::setTotalBooks(Library::getTotalBooks() + 1);
         }
+    }
 }
 void removeBook(Library books[100], int bookID)
+{
+    for (int i = 0; Library::getTotalBooks(); i++)
+    {
+        if (books[i].getBookID() == bookID)
+        {
+            Library::setTotalBooks(Library::getTotalBooks() - 1);
+            break;
+        }
+    }
+}
+void SortByTitle(Library books[100])
 {
 }

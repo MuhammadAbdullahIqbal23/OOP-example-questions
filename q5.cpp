@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
-
 class Integer
 {
     int num;
@@ -13,19 +11,18 @@ public:
         num = 0;
     }
 
-    Integer(int n)
+    Integer(int num)
     {
-        num = n;
+        this->num = num;
     }
 
     Integer(string str)
     {
-        num = stoi(str);
-    }
+        }
 
-    void set(int n)
+    void set(int number)
     {
-        num = n;
+        num = number;
     }
 
     int get() const

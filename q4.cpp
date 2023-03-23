@@ -9,6 +9,9 @@ private:
     char *accountNum;
 
 public:
+    StudentAccount()
+    {
+    }
     StudentAccount(char *n, float ir, double sb, char *an)
     {
         int size = 1;
@@ -17,40 +20,78 @@ public:
             size++;
         }
         name = new char[size];
-        name = n;
+        for (int i = 0; i < size; i++)
+        {
+            name[i] = n[i];
+        }
         annualInterestRate = ir;
         savingBalance = sb;
         accountNum = new char[size];
-        accountNum = an;
+        for (int i = 0; i < size; i++)
+        {
+            accountNum[i] = an[i];
+        }
     }
     ~StudentAccount()
     {
         delete[] name;
         delete[] accountNum;
     }
-    void setSavingBalance(double sb)
+    char *getName() const
     {
-        savingBalance = sb;
+        return name;
     }
+
+    float getAnnualInterestRate() const
+    {
+        return annualInterestRate;
+    }
+
     double getSavingBalance() const
     {
         return savingBalance;
     }
-    float calculateMonthlyInterest() const
-    {
-        return (savingBalance * annualInterestRate) / 12.0;
-    }
-    void modifyInterestRate(float ir)
-    {
-        annualInterestRate = ir;
-    }
+
     char *getAccountNum() const
     {
         return accountNum;
     }
-};
 
-int main()
-{
-    return 0;
-}
+    void setName(const char *charr)
+    {
+        int size = 1;
+        for (int i = 0; charr[i] == '\0'; i++)
+        {
+            size++;
+        }
+        name = new char[size];
+        for (int i = 0; i < size; i++)
+        {
+            name[i] = charr[i];
+        }
+    }
+
+    void setAnnualInterestRate(float AIR)
+    {
+        annualInterestRate = AIR;
+    }
+
+    void setSavingBalance(double SB)
+    {
+        savingBalance = SB;
+    }
+
+    void setAccountNum(const char *AN)
+    {
+        int size = 1;
+        for (int i = 0; AN[i] == '\0'; i++)
+        {
+            size++;
+        }
+        accountNum = new char[size];
+        for (int i = 0; i < size; i++)
+        {
+            accountNum[i] = AN[i];
+        }
+    }
+};

@@ -5,9 +5,9 @@ using namespace std;
 class Pizza
 {
 private:
-    string name;
-    string topping;
-    string size;
+    char *name;
+    char *topping;
+    char *size;
     bool is_ready;
     double price;
 
@@ -21,7 +21,7 @@ public:
         price = 0.0;
     }
 
-    Pizza(string toppingVal, double priceVal)
+    Pizza(char *toppingVal, double priceVal)
     {
         name = "";
         size = "";
@@ -30,7 +30,7 @@ public:
         setPrice(priceVal);
     }
 
-    Pizza(string toppingVal, double priceVal, string nameVal, string sizeVal, bool ready_status)
+    Pizza(char *toppingVal, double priceVal, char *nameVal, char *sizeVal, bool ready_status)
     {
         setTopping(toppingVal);
         setPrice(priceVal);
@@ -50,9 +50,18 @@ public:
     ~Pizza()
     {
     }
-    void setTopping(string toppingVal)
+    void setTopping(char *toppingVal)
     {
-        topping = toppingVal;
+        int counter = 1;
+        for (int i = 0; toppingVal[i] == '\0'; i++)
+        {
+            counter++;
+        }
+        topping = new char[counter];
+        for (int i = 0; i < counter; i++)
+        {
+            topping[i] = toppingVal[i];
+        }
     }
 
     void setPrice(double priceVal)
@@ -60,17 +69,35 @@ public:
         price = priceVal;
     }
 
-    void setName(string nameVal)
+    void setName(char *nameVal)
     {
-        name = nameVal;
+        int counter = 1;
+        for (int i = 0; nameVal[i] == '\0'; i++)
+        {
+            counter++;
+        }
+        name = new char[counter];
+        for (int i = 0; i < counter; i++)
+        {
+            name[i] = nameVal[i];
+        }
     }
 
-    void setSize(string sizeVal)
+    void setSize(char *sizeVal)
     {
-        size = sizeVal;
+        int counter = 1;
+        for (int i = 0; sizeVal[i] == '\0'; i++)
+        {
+            counter++;
+        }
+        size = new char[counter];
+        for (int i = 0; i < counter; i++)
+        {
+            size[i] = sizeVal[i];
+        }
     }
 
-    string getTopping()
+    char *getTopping()
     {
         return topping;
     }
@@ -80,19 +107,19 @@ public:
         return price;
     }
 
-    string getName()
+    char *getName()
     {
         return name;
     }
 
-    string getSize()
+    char *getSize()
     {
         return size;
     }
 
     void makePizza()
     {
-        if (topping == "")
+        if (topping == NULL)
         {
             is_ready = true;
         }

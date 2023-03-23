@@ -24,14 +24,14 @@ public:
         depth = d;
         row = r;
         col = c;
-        image = new Pixel **[depth];
-        for (int k = 0; k < depth; k++)
+        image = new Pixel **[row];
+        for (int i = 0; i < depth; i++)
         {
-            image[k] = new Pixel *[row];
-            for (int i = 0; i < row; i++)
+            image[i] = new Pixel *[col];
+            for (int j = 0; j < row; j++)
             {
-                image[k][i] = new Pixel[col];
-                for (int j = 0; j < col; j++)
+                image[i][j] = new Pixel[depth];
+                for (int k = 0; k < col; k++)
                 {
                     image[i][j][k].red = 0;
                     image[i][j][k].green = 0;
@@ -45,14 +45,14 @@ public:
         depth = img.depth;
         row = img.row;
         col = img.col;
-        image = new Pixel **[depth];
-        for (int k = 0; k < depth; k++)
+        image = new Pixel **[row];
+        for (int i = 0; i < depth; i++)
         {
-            image[k] = new Pixel *[row];
-            for (int i = 0; i < row; i++)
+            image[i] = new Pixel *[col];
+            for (int j = 0; j < row; j++)
             {
-                image[k][i] = new Pixel[col];
-                for (int j = 0; j < col; j++)
+                image[i][j] = new Pixel[depth];
+                for (int k = 0; k < col; k++)
                 {
                     image[i][j][k].red = img.image[i][j][k].red;
                     image[i][j][k].green = img.image[i][j][k].green;
@@ -64,9 +64,9 @@ public:
 
     ~Image()
     {
-        for (int i = 0; i < depth; i++)
+        for (int i = 0; i < row; i++)
         {
-            for (int j = 0; j < row; j++)
+            for (int j = 0; j < col; j++)
             {
                 delete[] image[i][j];
             }
@@ -99,13 +99,13 @@ public:
     }
     void fill(Pixel p)
     {
-        for (int k = 0; k < depth; k++)
+        for (int i = 0; i < row; i++)
         {
-            for (int i = 0; i < row; i++)
+            for (int j = 0; j < col; j++)
             {
-                for (int j = 0; j < col; j++)
+                for (int k = 0; k < depth; k++)
                 {
-                    image[k][i][j] = p;
+                    image[i][j][k] = p;
                 }
             }
         }
@@ -113,8 +113,10 @@ public:
 
     void clear()
     {
-        fill({0, 0, 0}); // fill with black
+        Pixel pix = {0, 0, 0};
+        fill(pix);
     }
+
     double getAverageBrightness()
     {
         double totalBrightness = 0.0;

@@ -47,7 +47,9 @@ public:
         setSize(pizza.size);
         is_ready = pizza.is_ready;
     }
-
+    ~Pizza()
+    {
+    }
     void setTopping(string toppingVal)
     {
         topping = toppingVal;
@@ -105,35 +107,3 @@ public:
     {
     }
 };
-
-int main()
-{
-    string topping, name, size;
-    double price;
-    bool ready_status;
-
-    cout << "Enter pizza topping: ";
-    getline(cin, topping);
-
-    cout << "Enter pizza price: ";
-    cin >> price;
-    cin.ignore();
-
-    cout << "Enter pizza name: ";
-    getline(cin, name);
-
-    cout << "Enter pizza size (regular, medium, large): ";
-    getline(cin, size);
-
-    cout << "Is the pizza ready? (1 for yes, 0 for no): ";
-    cin >> ready_status;
-
-    Pizza p1(topping, price, name, size, ready_status);
-    p1.makePizza();
-
-    cout << "Pizza topping: " << p1.getTopping() << endl;
-    cout << "Pizza size: " << p1.getSize() << endl;
-    cout << "Pizza price: " << p1.getPrice() << endl;
-    cout << "Pizza status: " << p1.check_status() << endl;
-    return 0;
-}

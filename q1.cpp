@@ -113,7 +113,10 @@ public:
 
     void clear()
     {
-        Pixel pix = {0, 0, 0};
+        Pixel pix;
+        pix.blue = 0;
+        pix.red = 0;
+        pix.green = 0;
         fill(pix);
     }
 
@@ -137,20 +140,44 @@ public:
     }
     int getMaximumBrightness(int depth)
     {
-        double totalBrightness = 0.0;
-
+        int MaximumBrightness = 0;
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                if (MaximumBrightness < image[i][j][depth].red)
+                {
+                    MaximumBrightness = image[i][j][depth].red;
+                }
+                if (MaximumBrightness < image[i][j][depth].green)
+                {
+                    MaximumBrightness = image[i][j][depth].green;
+                }
+                if (MaximumBrightness < image[i][j][depth].blue)
+                {
+                    MaximumBrightness = image[i][j][depth].blue;
+                }
+            }
+        }
+        return MaximumBrightness;
+    }
+    int countBrightPixel()
+    {
+        int counter = 0;
         for (int i = 0; i < row; i++)
         {
             for (int j = 0; j < col; j++)
             {
                 for (int k = 0; k < depth; k++)
                 {
-                    totalBrightness += image[i][j][k].blue + image[i][j][k].green + image[i][j][k].red;
+                    if (image[i][j][k].red == 255 || image[i][j][k].green == 255 || image[i][j][k].blue == 255)
+                    {
+                        counter++;
+                    }
                 }
             }
         }
-        return totalBrightness;
+        return counter;
     }
-    int countBrightPixel();
     void transposePixel(int depth);
 };

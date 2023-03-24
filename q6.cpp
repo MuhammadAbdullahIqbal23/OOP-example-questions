@@ -78,16 +78,23 @@ public:
     }
     void setQuantity(int quantity)
     {
-
-        this->quantity = quantity;
+        if (quantity < 1)
+        {
+            cout << "Quantity cannot be below 1" << endl;
+            return;
+        }
+        else
+        {
+            this->quantity = quantity;
+        }
     }
     void setPrice(float price)
     {
         this->price = price;
     }
-    static void setTotalBooks(int totBooks)
+    static void setTotalBooks(int totalBookz)
     {
-        totalBooks = totBooks;
+        totalBooks = totalBookz;
     }
     void calcTotalPrice()
     {

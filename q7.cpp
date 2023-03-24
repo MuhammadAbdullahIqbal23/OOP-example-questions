@@ -60,19 +60,23 @@ public:
         int i = 0;
         while (courseCodes[i] != courseCode)
         {
+            if (i == getNumCourses())
+            {
+                return;
+            }
             i++;
         }
         courseGrades[i] = grade;
     }
     void addCourse(string courseCode, int grade)
     {
+        courseCodes[numCourses + 1] = courseCode;
+        courseGrades[numCourses + 1] = grade;
         numCourses++;
-        courseCodes[numCourses] = courseCode;
-        courseGrades[numCourses] = grade;
     }
     void calcGPA()
     {
-        float GPA;
+        float GPA = 0.0;
         for (int i = 0; courseCodes[i] == courseCodes[numCourses]; i++)
         {
             GPA = GPA + courseGrades[i];
@@ -113,7 +117,7 @@ float getMaxGPA(Student students[], int numStudents)
 float getMinGPA(Student students[], int numStudents)
 {
 
-    float MinGPA = -1;
+    float MinGPA = 10;
     for (int i = 0; i < numStudents; i++)
     {
         if (MinGPA > students[i].getGPA())

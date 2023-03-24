@@ -130,8 +130,4 @@ public:
     {
         return is_ready;
     }
-
-    ~Pizza()
-    {
-    }
 };

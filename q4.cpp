@@ -47,3 +47,6 @@ public:
         delete[] accountNum;
     }
 };
+void OpenCustomerAccount(StudentAccount *savers[], int accountsOpen, char *NameVal, double balance)
+{
+}

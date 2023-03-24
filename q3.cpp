@@ -2,6 +2,7 @@
 #include <cstring>
 #include <string>
 using namespace std;
+
 class String
 {
 private:
@@ -48,7 +49,7 @@ public:
     int stringLength()
     {
         size = 1;
-        for (int i = 0; data == '\0'; i++)
+        for (int i = 0; data[i] == '\0'; i++)
         {
             size++;
         }
@@ -113,18 +114,41 @@ public:
         {
             strSize++;
         }
-        if (size != strSize)
-        {
-            return false;
-        }
+        int str1;
+        int str2;
+        int str3;
+        bool flag;
         for (int i = 0; i < strSize; i++)
         {
-            if (tolower(data[i]) != tolower(str[i]))
+            str1 = static_cast<int>(str[i]);
+            str2 = static_cast<int>(str[i] + 32);
+            str3 = static_cast<int>(str[i] - 32);
+            if (str[i] != data[i])
             {
-                return false;
+                if (str1 > 96 && str1 < 123)
+                {
+                    if (str1 != str2 && str1 != str3)
+                    {
+                        flag = false;
+
+                        return flag;
+                    }
+                    else if (str1 > 64 && str1 < 91)
+                    {
+                        if (str1 != str2 && str1 != str3)
+                        {
+                            flag = false;
+                            return flag;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                flag = true;
             }
         }
-        return true;
+        return flag;
     }
     char *substring(char *substr, int startIndex)
     {
@@ -163,9 +187,9 @@ public:
                 break;
             }
         }
-        for (int j = counter; j < endIndex; j++)
+        for (int i = counter; i < endIndex; i++)
         {
-            cout << substr[j];
+            cout << substr[i];
         }
     }
 };

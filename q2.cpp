@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 using namespace std;
 
 class Pizza
@@ -26,25 +27,25 @@ public:
         name = "";
         size = "";
         is_ready = false;
-        setTopping(toppingVal);
-        setPrice(priceVal);
+        topping = toppingVal;
+        price = priceVal;
     }
 
     Pizza(char *toppingVal, double priceVal, char *nameVal, char *sizeVal, bool ready_status)
     {
-        setTopping(toppingVal);
-        setPrice(priceVal);
-        setName(nameVal);
-        setSize(sizeVal);
+        topping = toppingVal;
+        price = priceVal;
+        name = nameVal;
+        size = sizeVal;
         is_ready = ready_status;
     }
 
     Pizza(const Pizza &pizza)
     {
-        setTopping(pizza.topping);
-        setPrice(pizza.price);
-        setName(pizza.name);
-        setSize(pizza.size);
+        topping = pizza.topping;
+        price = pizza.price;
+        name = pizza.name;
+        size = pizza.size;
         is_ready = pizza.is_ready;
     }
     ~Pizza()

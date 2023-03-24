@@ -54,9 +54,9 @@ public:
                 image[i][j] = new Pixel[depth];
                 for (int k = 0; k < col; k++)
                 {
-                    image[i][j][k].red = img.image[i][j][k].red;
                     image[i][j][k].green = img.image[i][j][k].green;
                     image[i][j][k].blue = img.image[i][j][k].blue;
+                    image[i][j][k].red = img.image[i][j][k].red;
                 }
             }
         }
@@ -64,14 +64,6 @@ public:
 
     ~Image()
     {
-        for (int i = 0; i < row; i++)
-        {
-            for (int j = 0; j < col; j++)
-            {
-                delete[] image[i][j];
-            }
-            delete[] image[i];
-        }
         delete[] image;
     }
     int getRow()
@@ -95,7 +87,7 @@ public:
     }
     void setPixel(int x, int y, int z, Pixel p)
     {
-        image[z][x][y] = p;
+        image[x][y][z] = p;
     }
     void fill(Pixel p)
     {
@@ -123,7 +115,7 @@ public:
     double getAverageBrightness()
     {
         double totalBrightness = 0.0;
-        int totalPixels = row * col * depth;
+        int totalPixels = getRow() * getCol() * getDepth();
 
         for (int i = 0; i < row; i++)
         {
@@ -131,12 +123,12 @@ public:
             {
                 for (int k = 0; k < depth; k++)
                 {
-                    totalBrightness += image[i][j][k].blue + image[i][j][k].green + image[i][j][k].red;
+                    totalBrightness = totalBrightness + image[i][j][k].green + image[i][j][k].blue + image[i][j][k].red;
                 }
             }
         }
-
-        return totalBrightness / totalPixels;
+        double AverageBrightness = totalBrightness / totalPixels;
+        return AverageBrightness;
     }
     int getMaximumBrightness(int depth)
     {
@@ -145,17 +137,30 @@ public:
         {
             for (int j = 0; j < col; j++)
             {
-                if (MaximumBrightness < image[i][j][depth].red)
-                {
-                    MaximumBrightness = image[i][j][depth].red;
-                }
                 if (MaximumBrightness < image[i][j][depth].green)
                 {
                     MaximumBrightness = image[i][j][depth].green;
                 }
+            }
+        }
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
                 if (MaximumBrightness < image[i][j][depth].blue)
                 {
                     MaximumBrightness = image[i][j][depth].blue;
+                }
+            }
+        }
+
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                if (MaximumBrightness < image[i][j][depth].red)
+                {
+                    MaximumBrightness = image[i][j][depth].red;
                 }
             }
         }
@@ -164,11 +169,11 @@ public:
     int countBrightPixel()
     {
         int counter = 0;
-        for (int i = 0; i < row; i++)
+        for (int i = 0; i < getRow(); i++)
         {
-            for (int j = 0; j < col; j++)
+            for (int j = 0; j < getCol(); j++)
             {
-                for (int k = 0; k < depth; k++)
+                for (int k = 0; k < getDepth(); k++)
                 {
                     if (image[i][j][k].red == 255 || image[i][j][k].green == 255 || image[i][j][k].blue == 255)
                     {

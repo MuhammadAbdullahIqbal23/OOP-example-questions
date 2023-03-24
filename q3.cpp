@@ -45,6 +45,7 @@ public:
     ~String()
     {
         delete[] data;
+        size = 0;
     }
     int stringLength()
     {
@@ -65,14 +66,16 @@ public:
     {
         if (size == 0)
         {
-            return 0;
+            cout << "data is empty";
+            return false;
         }
-        return 1;
+        return true;
+        cout << "data is not empty";
     }
 
     int charAt(char c)
     {
-        int size = 1;
+        size = 1;
         for (int i = 0; data[i] == '\0'; i++)
         {
             size++;

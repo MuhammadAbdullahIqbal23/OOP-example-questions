@@ -117,6 +117,10 @@ public:
         {
             strSize++;
         }
+        if (size != strSize)
+        {
+            return false;
+        }
         int str1;
         int str2;
         int str3;

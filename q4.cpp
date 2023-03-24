@@ -46,7 +46,61 @@ public:
         delete[] name;
         delete[] accountNum;
     }
+
+    char *getName()
+    {
+        return name;
+    }
+    float getAnnualInterestRate()
+    {
+        return annualInterestRate;
+    }
+
+    double getSavingBalance()
+    {
+        return savingBalance;
+    }
+
+    char *getAccountNum()
+    {
+        return accountNum;
+    }
+
+    void setAnnualInterestRate(float AnnualInterestRate)
+    {
+        annualInterestRate = AnnualInterestRate;
+    }
+
+    void setSavingBalance(double SavingBalance)
+    {
+        savingBalance = SavingBalance;
+    }
 };
 void OpenCustomerAccount(StudentAccount *savers[], int accountsOpen, char *NameVal, double balance)
+{
+}
+float calculateMonthlyInterest(StudentAccount *saver)
+{
+    float MonthlyInterest;
+    MonthlyInterest = saver->getSavingBalance() * saver->getAnnualInterestRate() / 12.0;
+    return MonthlyInterest;
+}
+void modifyInterestRate(StudentAccount *saver, float newValue)
+{
+    saver->setAnnualInterestRate(newValue);
+}
+int SearchCustomer(StudentAccount *savers[], int accountsOpen, char *accountNum)
+{
+    for (int i = 0; i < accountsOpen; i++)
+    {
+        if (savers[i]->getAccountNum() == accountNum)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+bool UpdateAccountBalance(StudentAccount *savers[], int accountsOpen, char *accountNumVal, double balanceVal)
 {
 }

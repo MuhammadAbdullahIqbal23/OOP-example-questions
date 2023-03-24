@@ -55,39 +55,43 @@ public:
 
     double doubleValue()
     {
-        return static_cast<double>(num);
+        double val;
+        val = num;
+        return val;
     }
 
     float floatValue()
     {
-        return static_cast<float>(num);
+        float val;
+        val = num;
+        return val;
     }
 
     Integer plus(const Integer obj)
     {
-        int val;
-        val = this->num + obj.num;
+        Integer val;
+        val.set(num + obj.get());
         return val;
     }
 
     Integer minus(const Integer obj)
     {
-        int val;
-        val = this->num - obj.num;
+        Integer val;
+        val.set(this->num - obj.get());
         return val;
     }
 
     Integer multiply(const Integer obj)
     {
-        int val;
-        val = this->num * obj.num;
+        Integer val;
+        val.set(this->num * obj.get());
         return val;
     }
 
     Integer divide(const Integer obj)
     {
-        int val;
-        val = num / obj.num;
+        Integer val;
+        val.set(this->num / obj.get());
         return val;
     }
     static int numberOfLeadingZeros(int i)
